@@ -1464,6 +1464,10 @@ a {
         gap: 20px;
     }
 
+    .hero-background img {
+        object-position: 70% top;
+    }
+
     .hero-content {
         padding: 150px 20px 60px;
     }
