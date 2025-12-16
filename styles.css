@@ -986,33 +986,16 @@ a {
     aspect-ratio: 1;
     background: var(--card-bg);
     opacity: 0;
-    transform: translateY(60px) rotate(3deg);
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .gallery-item.visible {
     opacity: 1;
-    transform: translateY(0) rotate(0);
+    transform: translateY(0) scale(1);
 }
 
-/* Flying in from different directions */
-.gallery-item:nth-child(1) { transform: translateX(-100px) rotate(-5deg); }
-.gallery-item:nth-child(2) { transform: translateY(-80px) rotate(3deg); }
-.gallery-item:nth-child(3) { transform: translateX(100px) rotate(5deg); }
-.gallery-item:nth-child(4) { transform: translateX(-80px) translateY(50px) rotate(-3deg); }
-.gallery-item:nth-child(5) { transform: translateY(100px) rotate(-5deg); }
-.gallery-item:nth-child(6) { transform: translateX(80px) translateY(50px) rotate(3deg); }
-
-.gallery-item.visible:nth-child(1),
-.gallery-item.visible:nth-child(2),
-.gallery-item.visible:nth-child(3),
-.gallery-item.visible:nth-child(4),
-.gallery-item.visible:nth-child(5),
-.gallery-item.visible:nth-child(6) {
-    transform: translateX(0) translateY(0) rotate(0);
-}
-
-/* Staggered delay for flying effect */
+/* Staggered delay for fade-in effect */
 .gallery-item:nth-child(1) { transition-delay: 0.1s; }
 .gallery-item:nth-child(2) { transition-delay: 0.2s; }
 .gallery-item:nth-child(3) { transition-delay: 0.3s; }
