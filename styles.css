@@ -1029,10 +1029,16 @@ a {
 .gallery-item.large.featured {
     grid-column: 1 / -1;
     grid-row: span 1;
-    height: 500px;
+    height: auto;
+    aspect-ratio: 16 / 9;
     border: 3px solid #ffd700;
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
     position: relative;
+}
+
+.gallery-item.large.featured img {
+    object-fit: contain;
+    background: #0a1628;
 }
 
 .gallery-item.large.featured::before {
@@ -1663,7 +1669,8 @@ a {
     }
 
     .gallery-item.large.featured {
-        height: 350px;
+        height: auto;
+        aspect-ratio: 16 / 9;
     }
 
     .photo-links {
