@@ -1336,36 +1336,153 @@ a {
     margin-bottom: 50px;
 }
 
-/* World Triathlon Embed */
-.world-triathlon-embed {
+/* World Triathlon Stats */
+.world-triathlon-stats {
     margin-top: 60px;
     padding-top: 40px;
     border-top: 1px solid var(--card-bg);
 }
 
-.world-triathlon-embed .subsection-title {
+.world-triathlon-stats .subsection-title {
     font-size: 1.8rem;
     margin-bottom: 15px;
     color: var(--text-light);
 }
 
-.world-triathlon-embed .embed-note {
+.world-triathlon-stats .stats-note {
     color: var(--text-muted);
     margin-bottom: 30px;
+    font-size: 0.95rem;
 }
 
-.iframe-container {
-    background: white;
+.stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.ranking-card {
+    background: var(--card-bg);
+    padding: 25px 35px;
     border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-width: 120px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.iframe-container iframe {
-    width: 100%;
-    height: 700px;
-    border: none;
+.ranking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.ranking-card.highlight {
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(0, 212, 170, 0.2) 100%);
+    border: 1px solid var(--accent-color);
+}
+
+.ranking-card.gold {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 170, 0, 0.3) 100%);
+    border: 2px solid #ffd700;
+}
+
+.ranking-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ranking-value {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: var(--text-light);
+}
+
+.ranking-card.gold .ranking-value {
+    color: #ffd700;
+}
+
+.results-title {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    color: var(--text-light);
+}
+
+.results-table {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    text-align: left;
+}
+
+.result-row {
+    display: grid;
+    grid-template-columns: 60px 120px 1fr 100px;
+    gap: 15px;
+    padding: 15px 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.result-row:hover {
+    transform: translateX(5px);
+    background: rgba(18, 35, 61, 0.8);
+}
+
+.result-pos {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    background: var(--dark-bg);
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.result-pos.pos-1 {
+    background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+    color: #1a1a1a;
+}
+
+.result-pos.pos-2 {
+    background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
+    color: #1a1a1a;
+}
+
+.result-pos.pos-3 {
+    background: linear-gradient(135deg, #cd7f32 0%, #b87333 100%);
+    color: white;
+}
+
+.result-pos.pos-4 {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.result-date {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.result-event {
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.result-time {
+    color: var(--accent-color);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-align: right;
 }
 
 .view-full-profile-btn {
@@ -1385,6 +1502,42 @@ a {
 .view-full-profile-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 40px rgba(0, 102, 204, 0.4);
+}
+
+/* Responsive results table */
+@media (max-width: 768px) {
+    .result-row {
+        grid-template-columns: 50px 1fr;
+        grid-template-rows: auto auto;
+        gap: 5px 15px;
+    }
+
+    .result-pos {
+        grid-row: span 2;
+        align-self: center;
+    }
+
+    .result-date {
+        font-size: 0.8rem;
+    }
+
+    .result-event {
+        grid-column: 2;
+        font-size: 0.9rem;
+    }
+
+    .result-time {
+        display: none;
+    }
+
+    .ranking-card {
+        padding: 20px 25px;
+        min-width: 100px;
+    }
+
+    .ranking-value {
+        font-size: 2rem;
+    }
 }
 
 .social-links {
