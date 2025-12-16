@@ -929,7 +929,7 @@ a {
 
 .photo-gallery.expanded {
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 300px;
+    grid-auto-rows: minmax(250px, auto);
 }
 
 /* More Photos Section */
@@ -1012,7 +1012,6 @@ a {
 .gallery-item.featured {
     grid-column: 1 / -1;
     grid-row: span 1;
-    height: auto;
     aspect-ratio: 16 / 9;
     border: 3px solid #ffd700;
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
@@ -1021,6 +1020,7 @@ a {
 
 .gallery-item.featured img {
     object-fit: contain;
+    object-position: center;
     background: #0a1628;
 }
 
