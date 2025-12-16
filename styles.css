@@ -1026,7 +1026,7 @@ a {
     aspect-ratio: auto;
 }
 
-.gallery-item.large.featured {
+.gallery-item.featured {
     grid-column: 1 / -1;
     grid-row: span 1;
     height: auto;
@@ -1036,12 +1036,12 @@ a {
     position: relative;
 }
 
-.gallery-item.large.featured img {
+.gallery-item.featured img {
     object-fit: contain;
     background: #0a1628;
 }
 
-.gallery-item.large.featured::before {
+.gallery-item.featured::before {
     content: 'FEATURED';
     position: absolute;
     top: 15px;
@@ -1059,7 +1059,7 @@ a {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.gallery-item.large.featured:hover {
+.gallery-item.featured:hover {
     box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
 }
 
@@ -1668,7 +1668,7 @@ a {
         height: 300px;
     }
 
-    .gallery-item.large.featured {
+    .gallery-item.featured {
         height: auto;
         aspect-ratio: 16 / 9;
     }
