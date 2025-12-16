@@ -1,22 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0066cc"/>
-      <stop offset="100%" style="stop-color:#00d4aa"/>
+    <!-- British flag colors gradient -->
+    <linearGradient id="britishGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#012169"/>
+      <stop offset="50%" style="stop-color:#C8102E"/>
+      <stop offset="100%" style="stop-color:#012169"/>
     </linearGradient>
+    <!-- Gold/Olympic gradient -->
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#ffd700"/>
       <stop offset="100%" style="stop-color:#ffaa00"/>
     </linearGradient>
+    <!-- Teal accent -->
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0066cc"/>
+      <stop offset="100%" style="stop-color:#00d4aa"/>
+    </linearGradient>
   </defs>
-  <!-- Background circle -->
-  <circle cx="50" cy="50" r="48" fill="url(#bgGrad)"/>
-  <!-- MG initials -->
-  <text x="50" y="62" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">MG</text>
-  <!-- Gold accent line -->
-  <path d="M20 75 Q50 85 80 75" stroke="url(#goldGrad)" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <!-- Small triathlon icons -->
-  <circle cx="30" cy="25" r="6" fill="url(#goldGrad)" opacity="0.9"/>
-  <circle cx="50" cy="20" r="6" fill="url(#goldGrad)" opacity="0.9"/>
-  <circle cx="70" cy="25" r="6" fill="url(#goldGrad)" opacity="0.9"/>
+
+  <!-- Background circle with British colors -->
+  <circle cx="50" cy="50" r="48" fill="url(#britishGrad)"/>
+
+  <!-- Gold ring (Olympic reference) -->
+  <circle cx="50" cy="50" r="44" fill="none" stroke="url(#goldGrad)" stroke-width="3"/>
+
+  <!-- Inner dark circle -->
+  <circle cx="50" cy="50" r="40" fill="#0a1628"/>
+
+  <!-- Stylized M and G combined as running figure -->
+  <g fill="white">
+    <!-- M stylized -->
+    <path d="M25 70 L25 35 L37 55 L50 35 L50 70 L44 70 L44 50 L37 62 L30 50 L30 70 Z" fill="white"/>
+    <!-- G stylized -->
+    <path d="M55 52 L55 35 C55 30 75 28 75 40 L75 60 C75 72 55 74 55 62 L55 55 L65 55 L65 62 C65 66 70 66 70 60 L70 40 C70 34 60 34 60 40 L60 52 Z" fill="white"/>
+  </g>
+
+  <!-- Triathlon icons at top -->
+  <g fill="url(#goldGrad)">
+    <!-- Swim wave -->
+    <path d="M22 18 Q27 14 32 18 Q37 22 42 18" stroke="url(#goldGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Bike wheel -->
+    <circle cx="50" cy="17" r="5" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+    <circle cx="50" cy="17" r="2" fill="url(#goldGrad)"/>
+    <!-- Run figure -->
+    <circle cx="72" cy="13" r="3" fill="url(#goldGrad)"/>
+    <path d="M72 16 L72 22 M69 19 L75 19 M70 22 L68 27 M74 22 L76 27" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Bottom accent arc -->
+  <path d="M20 80 Q50 90 80 80" stroke="url(#accentGrad)" stroke-width="3" fill="none" stroke-linecap="round"/>
 </svg>
