@@ -340,6 +340,13 @@ a {
     box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
 }
 
+.badge.olympic {
+    background: linear-gradient(135deg, #012169 0%, #C8102E 50%, #012169 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(200, 16, 46, 0.5);
+    border: 2px solid #ffd700;
+}
+
 @keyframes pulse {
     0%, 100% {
         transform: scale(1);
