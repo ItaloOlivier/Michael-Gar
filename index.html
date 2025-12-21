@@ -17,6 +17,7 @@
             <div class="logo">MG Fan Page</div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
+                <li><a href="#news">News</a></li>
                 <li><a href="#achievements">Achievements</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#follow">Follow</a></li>
@@ -80,6 +81,17 @@
                             <span class="stat-value">707 Team Minini</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="section news-section">
+            <div class="container">
+                <h2 class="section-title">Latest News</h2>
+                <p class="news-intro">Stay updated with Michael's latest races, achievements, and announcements!</p>
+                <div id="news-container" class="news-grid">
+                    <!-- News articles will be loaded here dynamically -->
+                    <div class="news-loading">Loading news...</div>
                 </div>
             </div>
         </section>
@@ -493,8 +505,125 @@
 
     <!-- Scroll Animations Script -->
     <script>
+        // Load news from JSON
+        async function loadNews() {
+            const newsContainer = document.getElementById('news-container');
+
+            try {
+                const response = await fetch('news.json');
+                if (!response.ok) throw new Error('Failed to load news');
+
+                const news = await response.json();
+
+                // Sort by date (newest first)
+                news.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Clear loading message
+                newsContainer.innerHTML = '';
+
+                // Render news cards
+                news.forEach(article => {
+                    const card = createNewsCard(article);
+                    newsContainer.appendChild(card);
+                });
+
+                // Add scroll animation observer to news cards
+                const newsCards = document.querySelectorAll('.news-card');
+                newsCards.forEach(card => {
+                    newsObserver.observe(card);
+                });
+
+            } catch (error) {
+                console.error('Error loading news:', error);
+                newsContainer.innerHTML = '<div class="news-loading">Unable to load news. Please try again later.</div>';
+            }
+        }
+
+        // Create a news card element
+        function createNewsCard(article) {
+            const card = document.createElement('article');
+            card.className = 'news-card';
+
+            // Format date
+            const date = new Date(article.date);
+            const formattedDate = date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Build media section
+            let mediaHTML = '';
+            if (article.youtubeUrl) {
+                const videoId = extractYouTubeId(article.youtubeUrl);
+                if (videoId) {
+                    mediaHTML = `
+                        <div class="news-card-media">
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/${videoId}"
+                                        title="${article.title}"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            </div>
+                        </div>`;
+                }
+            } else if (article.image) {
+                mediaHTML = `
+                    <div class="news-card-media">
+                        <img src="${article.image}" alt="${article.title}" loading="lazy">
+                    </div>`;
+            } else {
+                mediaHTML = `
+                    <div class="news-card-media">
+                        <div class="news-card-placeholder">📰</div>
+                    </div>`;
+            }
+
+            // Build link section
+            let linkHTML = '';
+            if (article.externalLink) {
+                linkHTML = `<a href="${article.externalLink}" target="_blank" rel="noopener noreferrer" class="news-card-link">Read more</a>`;
+            }
+
+            // Category badge
+            const categoryClass = article.category || 'other';
+            const categoryLabel = categoryClass.replace('-', ' ');
+
+            card.innerHTML = `
+                ${mediaHTML}
+                <div class="news-card-content">
+                    <span class="news-card-date">${formattedDate}</span>
+                    <span class="news-card-category ${categoryClass}">${categoryLabel}</span>
+                    <h3 class="news-card-title">${article.title}</h3>
+                    <p class="news-card-text">${article.content}</p>
+                    ${linkHTML}
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Extract YouTube video ID from URL
+        function extractYouTubeId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        // News observer for scroll animations
+        const newsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
         // Intersection Observer for scroll animations
         document.addEventListener('DOMContentLoaded', function() {
+            // Load news articles
+            loadNews();
+
             // Elements to animate on scroll
             const animatedElements = document.querySelectorAll('.section-title, .about-text, .about-stats, .stat-card, .timeline-item, .gallery-item, .fan-comment, .social-card, .more-photos, .instagram-section');
 

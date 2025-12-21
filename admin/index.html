@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Michael Gar Fan Page</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <h1>Admin Login</h1>
+            <p>Enter the admin password to continue</p>
+            <form id="login-form">
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p id="login-error" class="error"></p>
+            <a href="../index.html" class="back-link">Back to Fan Page</a>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="admin-dashboard hidden">
+        <header class="admin-header">
+            <h1>News Admin</h1>
+            <div class="header-actions">
+                <a href="../index.html" class="btn btn-secondary">View Site</a>
+                <button id="logout-btn" class="btn btn-outline">Logout</button>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <!-- News Form -->
+            <section class="form-section">
+                <h2>Add New Article</h2>
+                <form id="news-form">
+                    <div class="form-group">
+                        <label for="title">Title *</label>
+                        <input type="text" id="title" required placeholder="Enter article title">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Date *</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select id="category">
+                                <option value="announcement">Announcement</option>
+                                <option value="race-result">Race Result</option>
+                                <option value="training">Training</option>
+                                <option value="media">Media</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Content *</label>
+                        <textarea id="content" rows="5" required placeholder="Write the article content..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Image URL</label>
+                        <input type="url" id="image" placeholder="https://example.com/image.jpg">
+                        <small>Upload image to /images/news/ folder and use: images/news/filename.jpg</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="youtube">YouTube URL</label>
+                        <input type="url" id="youtube" placeholder="https://www.youtube.com/watch?v=...">
+                        <small>Paste full YouTube video URL</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="external-link">External Link</label>
+                        <input type="url" id="external-link" placeholder="https://example.com/article">
+                        <small>Link to external news source</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Generate JSON</button>
+                </form>
+            </section>
+
+            <!-- JSON Output -->
+            <section class="output-section">
+                <h2>Generated JSON</h2>
+                <p class="output-instructions">Copy this JSON and add it to the <code>news.json</code> file in your repository.</p>
+
+                <div class="json-output-container">
+                    <pre id="json-output">
+{
+  "id": 1,
+  "title": "Your article title",
+  "date": "2025-01-01",
+  "content": "Your article content...",
+  "image": "",
+  "youtubeUrl": "",
+  "externalLink": "",
+  "category": "announcement"
+}</pre>
+                    <button id="copy-btn" class="btn btn-copy">Copy to Clipboard</button>
+                </div>
+
+                <div class="instructions">
+                    <h3>How to Add News</h3>
+                    <ol>
+                        <li>Fill out the form above with your article details</li>
+                        <li>Click "Generate JSON" to create the article data</li>
+                        <li>Copy the generated JSON</li>
+                        <li>Open <code>news.json</code> in your repository</li>
+                        <li>Add a comma after the last article's closing <code>}</code></li>
+                        <li>Paste your new article before the final <code>]</code></li>
+                        <li>Commit and push the changes to GitHub</li>
+                    </ol>
+
+                    <h3>Adding Images</h3>
+                    <ol>
+                        <li>Upload your image to <code>/images/news/</code> folder in the repository</li>
+                        <li>Use the path <code>images/news/your-image.jpg</code> in the Image URL field</li>
+                        <li>Or use an external image URL from another website</li>
+                    </ol>
+
+                    <h3>Adding YouTube Videos</h3>
+                    <ol>
+                        <li>Go to the YouTube video you want to embed</li>
+                        <li>Copy the full URL from your browser (e.g., https://www.youtube.com/watch?v=ABC123)</li>
+                        <li>Paste it in the YouTube URL field</li>
+                    </ol>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Simple password protection (not secure - just a basic deterrent)
+        const ADMIN_PASSWORD = 'michaelgar2025';
+
+        const loginScreen = document.getElementById('login-screen');
+        const adminDashboard = document.getElementById('admin-dashboard');
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        const logoutBtn = document.getElementById('logout-btn');
+        const newsForm = document.getElementById('news-form');
+        const jsonOutput = document.getElementById('json-output');
+        const copyBtn = document.getElementById('copy-btn');
+
+        // Check if already logged in
+        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+            showDashboard();
+        }
+
+        // Login form handler
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+
+            if (password === ADMIN_PASSWORD) {
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                showDashboard();
+            } else {
+                loginError.textContent = 'Incorrect password. Please try again.';
+                document.getElementById('password').value = '';
+            }
+        });
+
+        // Logout handler
+        logoutBtn.addEventListener('click', function() {
+            sessionStorage.removeItem('adminLoggedIn');
+            loginScreen.classList.remove('hidden');
+            adminDashboard.classList.add('hidden');
+        });
+
+        // Show dashboard
+        function showDashboard() {
+            loginScreen.classList.add('hidden');
+            adminDashboard.classList.remove('hidden');
+
+            // Set today's date as default
+            document.getElementById('date').valueAsDate = new Date();
+        }
+
+        // News form handler
+        newsForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const article = {
+                id: Date.now(),
+                title: document.getElementById('title').value,
+                date: document.getElementById('date').value,
+                content: document.getElementById('content').value,
+                image: document.getElementById('image').value || '',
+                youtubeUrl: document.getElementById('youtube').value || '',
+                externalLink: document.getElementById('external-link').value || '',
+                category: document.getElementById('category').value
+            };
+
+            // Generate formatted JSON
+            const jsonString = JSON.stringify(article, null, 2);
+            jsonOutput.textContent = jsonString;
+
+            // Scroll to output
+            document.querySelector('.output-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Copy to clipboard
+        copyBtn.addEventListener('click', function() {
+            const text = jsonOutput.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                copyBtn.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                setTimeout(() => {
+                    copyBtn.textContent = 'Copy to Clipboard';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy. Please select and copy manually.');
+            });
+        });
+    </script>
+</body>
+</html>
