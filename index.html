@@ -17,6 +17,7 @@
             <div class="logo">MG Fan Page</div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
+                <li><a href="#news">News</a></li>
                 <li><a href="#achievements">Achievements</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#follow">Follow</a></li>
@@ -79,6 +80,26 @@
                             <span class="stat-label">Team</span>
                             <span class="stat-value">707 Team Minini</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="section news-section">
+            <div class="container">
+                <h2 class="section-title">Latest News</h2>
+                <div class="news-header">
+                    <p class="news-intro">Stay updated with Michael's latest races, achievements, and announcements!</p>
+                    <a href="admin/" class="admin-link" title="Admin Console">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div id="news-container" class="news-grid">
+                    <div class="news-loading">
+                        <div class="loading-spinner"></div>
+                        <span>Loading news...</span>
                     </div>
                 </div>
             </div>
@@ -493,46 +514,42 @@
 
     <!-- Scroll Animations Script -->
     <script>
-        // Load news from JSON
+        // Load and render news articles
         async function loadNews() {
-            const newsContainer = document.getElementById('news-container');
+            const container = document.getElementById('news-container');
 
             try {
                 const response = await fetch('news.json');
                 if (!response.ok) throw new Error('Failed to load news');
 
-                const news = await response.json();
+                const articles = await response.json();
+                articles.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                // Sort by date (newest first)
-                news.sort((a, b) => new Date(b.date) - new Date(a.date));
+                container.innerHTML = '';
 
-                // Clear loading message
-                newsContainer.innerHTML = '';
-
-                // Render news cards
-                news.forEach(article => {
-                    const card = createNewsCard(article);
-                    newsContainer.appendChild(card);
+                articles.forEach((article, index) => {
+                    const card = createNewsCard(article, index);
+                    container.appendChild(card);
                 });
 
-                // Add scroll animation observer to news cards
+                // Observe news cards for animation
                 const newsCards = document.querySelectorAll('.news-card');
-                newsCards.forEach(card => {
-                    newsObserver.observe(card);
-                });
+                newsCards.forEach(card => observer.observe(card));
 
             } catch (error) {
                 console.error('Error loading news:', error);
-                newsContainer.innerHTML = '<div class="news-loading">Unable to load news. Please try again later.</div>';
+                container.innerHTML = `
+                    <div class="news-loading">
+                        <span>Unable to load news. Please try again later.</span>
+                    </div>`;
             }
         }
 
-        // Create a news card element
-        function createNewsCard(article) {
+        function createNewsCard(article, index) {
             const card = document.createElement('article');
             card.className = 'news-card';
+            card.style.transitionDelay = `${0.1 + index * 0.1}s`;
 
-            // Format date
             const date = new Date(article.date);
             const formattedDate = date.toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -540,7 +557,6 @@
                 day: 'numeric'
             });
 
-            // Build media section
             let mediaHTML = '';
             if (article.youtubeUrl) {
                 const videoId = extractYouTubeId(article.youtubeUrl);
@@ -549,9 +565,9 @@
                         <div class="news-card-media">
                             <div class="video-wrapper">
                                 <iframe src="https://www.youtube.com/embed/${videoId}"
-                                        title="${article.title}"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen></iframe>
+                                    title="${article.title}"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
                             </div>
                         </div>`;
                 }
@@ -561,29 +577,34 @@
                         <img src="${article.image}" alt="${article.title}" loading="lazy">
                     </div>`;
             } else {
-                // Clean placeholder with megaphone icon
                 mediaHTML = `
                     <div class="news-card-media">
                         <div class="news-card-placeholder">
                             <div class="news-card-placeholder-icon">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM18 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
                                 </svg>
                             </div>
-                            <span class="news-card-placeholder-text">Announcement</span>
+                            <span class="news-card-placeholder-text">News</span>
                         </div>
                     </div>`;
             }
 
-            // Build link section
-            let linkHTML = '';
-            if (article.externalLink) {
-                linkHTML = `<a href="${article.externalLink}" target="_blank" rel="noopener noreferrer" class="news-card-link">Read more</a>`;
-            }
-
-            // Category badge
             const categoryClass = article.category || 'other';
             const categoryLabel = categoryClass.replace('-', ' ');
+
+            let footerHTML = '';
+            if (article.externalLink) {
+                footerHTML = `
+                    <div class="news-card-footer">
+                        <a href="${article.externalLink}" target="_blank" rel="noopener noreferrer" class="news-card-link">
+                            Read more
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>`;
+            }
 
             card.innerHTML = `
                 ${mediaHTML}
@@ -594,22 +615,20 @@
                     </div>
                     <h3 class="news-card-title">${article.title}</h3>
                     <p class="news-card-text">${article.content}</p>
-                    ${linkHTML}
-                </div>
-            `;
+                    ${footerHTML}
+                </div>`;
 
             return card;
         }
 
-        // Extract YouTube video ID from URL
         function extractYouTubeId(url) {
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
             const match = url.match(regExp);
             return (match && match[2].length === 11) ? match[2] : null;
         }
 
-        // News observer for scroll animations
-        const newsObserver = new IntersectionObserver((entries) => {
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
@@ -617,27 +636,12 @@
             });
         }, { threshold: 0.1 });
 
-        // Intersection Observer for scroll animations
         document.addEventListener('DOMContentLoaded', function() {
             // Load news articles
             loadNews();
 
             // Elements to animate on scroll
             const animatedElements = document.querySelectorAll('.section-title, .about-text, .about-stats, .stat-card, .timeline-item, .gallery-item, .fan-comment, .social-card, .more-photos, .instagram-section');
-
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
 
             animatedElements.forEach(el => {
                 observer.observe(el);

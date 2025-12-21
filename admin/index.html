@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Michael Gar Fan Page</title>
+    <title>Admin Console | Michael Gar Fan Page</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="admin.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,44 +14,115 @@
     <!-- Login Screen -->
     <div id="login-screen" class="login-screen">
         <div class="login-card">
-            <h1>Admin Login</h1>
-            <p>Enter the admin password to continue</p>
+            <div class="login-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+            </div>
+            <h1>Admin Console</h1>
+            <p>Enter your password to manage news articles</p>
             <form id="login-form">
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Login</button>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+                    <button type="button" id="toggle-password" class="toggle-password">
+                        <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg class="eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/>
+                            <line x1="1" y1="1" x2="23" y2="23"/>
+                        </svg>
+                    </button>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span>Login</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
             </form>
             <p id="login-error" class="error"></p>
-            <a href="../index.html" class="back-link">Back to Fan Page</a>
+            <a href="../index.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Fan Page
+            </a>
         </div>
     </div>
 
     <!-- Admin Dashboard -->
     <div id="admin-dashboard" class="admin-dashboard hidden">
         <header class="admin-header">
-            <h1>News Admin</h1>
+            <div class="header-left">
+                <h1>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                    </svg>
+                    News Admin
+                </h1>
+            </div>
             <div class="header-actions">
-                <a href="../index.html" class="btn btn-secondary">View Site</a>
-                <button id="logout-btn" class="btn btn-outline">Logout</button>
+                <a href="../index.html" class="btn btn-secondary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                    View Site
+                </a>
+                <button id="logout-btn" class="btn btn-outline">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+                    </svg>
+                    Logout
+                </button>
             </div>
         </header>
 
         <main class="admin-main">
             <!-- News Form -->
             <section class="form-section">
-                <h2>Add New Article</h2>
+                <div class="section-header">
+                    <h2>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Add New Article
+                    </h2>
+                </div>
                 <form id="news-form">
                     <div class="form-group">
-                        <label for="title">Title *</label>
+                        <label for="title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+                            </svg>
+                            Title
+                        </label>
                         <input type="text" id="title" required placeholder="Enter article title">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="date">Date *</label>
+                            <label for="date">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                                Date
+                            </label>
                             <input type="date" id="date" required>
                         </div>
                         <div class="form-group">
-                            <label for="category">Category</label>
+                            <label for="category">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+                                    <line x1="7" y1="7" x2="7.01" y2="7"/>
+                                </svg>
+                                Category
+                            </label>
                             <select id="category">
                                 <option value="announcement">Announcement</option>
                                 <option value="race-result">Race Result</option>
@@ -63,40 +134,80 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="content">Content *</label>
+                        <label for="content">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                            Content
+                        </label>
                         <textarea id="content" rows="5" required placeholder="Write the article content..."></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="image">Image URL</label>
+                        <label for="image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                            Image URL
+                        </label>
                         <input type="url" id="image" placeholder="https://example.com/image.jpg">
-                        <small>Upload image to /images/news/ folder and use: images/news/filename.jpg</small>
+                        <small>Direct link to image or upload to /images/news/ folder</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="youtube">YouTube URL</label>
+                        <label for="youtube">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                            YouTube URL
+                        </label>
                         <input type="url" id="youtube" placeholder="https://www.youtube.com/watch?v=...">
-                        <small>Paste full YouTube video URL</small>
+                        <small>Paste the full YouTube video URL</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="external-link">External Link</label>
+                        <label for="external-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                            External Link
+                        </label>
                         <input type="url" id="external-link" placeholder="https://example.com/article">
-                        <small>Link to external news source</small>
+                        <small>Link to an external news source</small>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Generate JSON</button>
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Generate JSON
+                    </button>
                 </form>
             </section>
 
             <!-- JSON Output -->
             <section class="output-section">
-                <h2>Generated JSON</h2>
-                <p class="output-instructions">Copy this JSON and add it to the <code>news.json</code> file in your repository.</p>
+                <div class="section-header">
+                    <h2>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                        Generated JSON
+                    </h2>
+                </div>
 
-                <div class="json-output-container">
-                    <pre id="json-output">
-{
+                <div class="output-card">
+                    <div class="json-output-container">
+                        <pre id="json-output">{
   "id": 1,
   "title": "Your article title",
   "date": "2025-01-01",
@@ -106,41 +217,72 @@
   "externalLink": "",
   "category": "announcement"
 }</pre>
-                    <button id="copy-btn" class="btn btn-copy">Copy to Clipboard</button>
+                        <button id="copy-btn" class="btn btn-copy">
+                            <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                            </svg>
+                            <svg class="check-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <span>Copy</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="instructions">
-                    <h3>How to Add News</h3>
-                    <ol>
-                        <li>Fill out the form above with your article details</li>
-                        <li>Click "Generate JSON" to create the article data</li>
-                        <li>Copy the generated JSON</li>
-                        <li>Open <code>news.json</code> in your repository</li>
-                        <li>Add a comma after the last article's closing <code>}</code></li>
-                        <li>Paste your new article before the final <code>]</code></li>
-                        <li>Commit and push the changes to GitHub</li>
-                    </ol>
+                    <div class="instruction-card">
+                        <h3>
+                            <span class="step-number">1</span>
+                            Create Article
+                        </h3>
+                        <p>Fill out the form with your article details and click "Generate JSON"</p>
+                    </div>
+                    <div class="instruction-card">
+                        <h3>
+                            <span class="step-number">2</span>
+                            Copy JSON
+                        </h3>
+                        <p>Click the copy button to copy the generated JSON to your clipboard</p>
+                    </div>
+                    <div class="instruction-card">
+                        <h3>
+                            <span class="step-number">3</span>
+                            Update File
+                        </h3>
+                        <p>Open <code>news.json</code> in your repository and add the new article to the array</p>
+                    </div>
+                    <div class="instruction-card">
+                        <h3>
+                            <span class="step-number">4</span>
+                            Deploy
+                        </h3>
+                        <p>Commit and push the changes to GitHub to publish your article</p>
+                    </div>
+                </div>
 
-                    <h3>Adding Images</h3>
-                    <ol>
-                        <li>Upload your image to <code>/images/news/</code> folder in the repository</li>
-                        <li>Use the path <code>images/news/your-image.jpg</code> in the Image URL field</li>
-                        <li>Or use an external image URL from another website</li>
-                    </ol>
-
-                    <h3>Adding YouTube Videos</h3>
-                    <ol>
-                        <li>Go to the YouTube video you want to embed</li>
-                        <li>Copy the full URL from your browser (e.g., https://www.youtube.com/watch?v=ABC123)</li>
-                        <li>Paste it in the YouTube URL field</li>
-                    </ol>
+                <div class="tips-section">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                        Tips
+                    </h3>
+                    <ul>
+                        <li>Add a comma after the last article's <code>}</code> before pasting new JSON</li>
+                        <li>For images, you can use direct URLs or upload to <code>/images/news/</code></li>
+                        <li>YouTube videos will be embedded automatically</li>
+                        <li>Articles are sorted by date (newest first) on the site</li>
+                    </ul>
                 </div>
             </section>
         </main>
     </div>
 
     <script>
-        // Simple password protection (not secure - just a basic deterrent)
+        // Admin password (client-side only - not secure, just a basic deterrent)
         const ADMIN_PASSWORD = 'michaelgar2025';
 
         const loginScreen = document.getElementById('login-screen');
@@ -151,23 +293,34 @@
         const newsForm = document.getElementById('news-form');
         const jsonOutput = document.getElementById('json-output');
         const copyBtn = document.getElementById('copy-btn');
+        const togglePassword = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
 
         // Check if already logged in
         if (sessionStorage.getItem('adminLoggedIn') === 'true') {
             showDashboard();
         }
 
+        // Toggle password visibility
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePassword.querySelector('.eye-open').classList.toggle('hidden');
+            togglePassword.querySelector('.eye-closed').classList.toggle('hidden');
+        });
+
         // Login form handler
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const password = document.getElementById('password').value;
+            const password = passwordInput.value;
 
             if (password === ADMIN_PASSWORD) {
                 sessionStorage.setItem('adminLoggedIn', 'true');
                 showDashboard();
             } else {
                 loginError.textContent = 'Incorrect password. Please try again.';
-                document.getElementById('password').value = '';
+                passwordInput.value = '';
+                passwordInput.focus();
             }
         });
 
@@ -182,8 +335,6 @@
         function showDashboard() {
             loginScreen.classList.add('hidden');
             adminDashboard.classList.remove('hidden');
-
-            // Set today's date as default
             document.getElementById('date').valueAsDate = new Date();
         }
 
@@ -202,11 +353,9 @@
                 category: document.getElementById('category').value
             };
 
-            // Generate formatted JSON
             const jsonString = JSON.stringify(article, null, 2);
             jsonOutput.textContent = jsonString;
 
-            // Scroll to output
             document.querySelector('.output-section').scrollIntoView({ behavior: 'smooth' });
         });
 
@@ -214,10 +363,15 @@
         copyBtn.addEventListener('click', function() {
             const text = jsonOutput.textContent;
             navigator.clipboard.writeText(text).then(() => {
-                copyBtn.textContent = 'Copied!';
+                copyBtn.querySelector('.copy-icon').classList.add('hidden');
+                copyBtn.querySelector('.check-icon').classList.remove('hidden');
+                copyBtn.querySelector('span').textContent = 'Copied!';
                 copyBtn.classList.add('copied');
+
                 setTimeout(() => {
-                    copyBtn.textContent = 'Copy to Clipboard';
+                    copyBtn.querySelector('.copy-icon').classList.remove('hidden');
+                    copyBtn.querySelector('.check-icon').classList.add('hidden');
+                    copyBtn.querySelector('span').textContent = 'Copy';
                     copyBtn.classList.remove('copied');
                 }, 2000);
             }).catch(err => {

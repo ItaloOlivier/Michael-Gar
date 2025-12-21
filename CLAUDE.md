@@ -43,17 +43,26 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 ## Key Sections
 1. **Hero** - Full-screen banner with badges, CTA buttons
 2. **About** - Bio, stats cards, blockquote
-3. **Achievements** - Timeline of career milestones
-4. **Gallery** - Photo grid with lightbox
-5. **Fan Comments** - Testimonial cards
-6. **Follow** - Social media links (Instagram, World Triathlon, British Triathlon)
-7. **World Triathlon Stats** - Rankings and results table
+3. **News** - Dynamic news cards loaded from `news.json`, supports images/YouTube/external links
+4. **Achievements** - Timeline of career milestones
+5. **Gallery** - Photo grid with lightbox
+6. **Fan Comments** - Testimonial cards
+7. **Follow** - Social media links (Instagram, World Triathlon, British Triathlon)
+8. **World Triathlon Stats** - Rankings and results table
+
+## News System
+- **Data**: Articles stored in `news.json`
+- **Fields**: id, title, date, content, image, youtubeUrl, externalLink, category
+- **Categories**: announcement, race-result, training, media, other
+- **Display**: Responsive card grid with scroll animations
+- **Admin link**: Subtle lock icon in news section header
 
 ## Admin Panel
 - Located at `/admin/`
-- Password protected (session-based)
-- Generates JSON for news articles
-- Instructions for adding news, images, and YouTube videos
+- Password protected (session-based, password: michaelgar2025)
+- Form to create news articles with all fields
+- Generates JSON for copy/paste into `news.json`
+- Step-by-step instructions for adding articles
 
 ## Social Links
 - Instagram: @michaelgar_tri
@@ -72,8 +81,8 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 - Animated badges and cards
 
 ## Recent Updates
+- Added News section with dynamic JSON-powered article cards
+- Redesigned admin panel with modern UI, password toggle, step-by-step instructions
 - Added British Triathlon profile link
 - Added 707 Minini sponsor button
 - Added British Champion 2025 badge
-- Updated admin panel styling to match main site
-- Removed South African heritage references
