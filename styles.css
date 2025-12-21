@@ -1621,6 +1621,14 @@ a {
     box-shadow: 0 20px 60px rgba(0, 102, 204, 0.3);
 }
 
+.social-card.british-tri {
+    background: linear-gradient(135deg, #cf142b 0%, #00247d 100%);
+}
+
+.social-card.british-tri:hover {
+    box-shadow: 0 20px 60px rgba(207, 20, 43, 0.3);
+}
+
 .social-name {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
