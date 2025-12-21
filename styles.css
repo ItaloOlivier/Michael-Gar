@@ -1595,6 +1595,7 @@ a {
 
 .social-card:nth-child(1) { transition-delay: 0.1s; }
 .social-card:nth-child(2) { transition-delay: 0.3s; }
+.social-card:nth-child(3) { transition-delay: 0.5s; }
 
 .social-card:hover {
     transform: translateY(-10px) scale(1.05);
@@ -1622,11 +1623,47 @@ a {
 }
 
 .social-card.british-tri {
-    background: linear-gradient(135deg, #cf142b 0%, #00247d 100%);
+    background: linear-gradient(135deg, #012169 0%, #cf142b 50%, #012169 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-card.british-tri::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%),
+        linear-gradient(-45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+    pointer-events: none;
 }
 
 .social-card.british-tri:hover {
-    box-shadow: 0 20px 60px rgba(207, 20, 43, 0.3);
+    box-shadow: 0 20px 60px rgba(207, 20, 43, 0.4);
+}
+
+.gb-flag-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.gb-flag-icon .flag-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, #012169 0%, #cf142b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .social-name {
