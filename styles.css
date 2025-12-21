@@ -1622,15 +1622,24 @@ a {
     box-shadow: 0 20px 60px rgba(0, 102, 204, 0.3);
 }
 
-.social-card.british-tri {
+a.social-card.british-tri {
     background: linear-gradient(135deg, #012169 0%, #1a3a7c 50%, #cf142b 100%);
+    color: #fff;
 }
 
-.social-card.british-tri:hover {
+a.social-card.british-tri:hover {
     box-shadow: 0 20px 60px rgba(207, 20, 43, 0.4);
 }
 
-.gb-flag-icon {
+a.social-card.british-tri .social-name {
+    color: #fff;
+}
+
+a.social-card.british-tri .social-handle {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+a.social-card.british-tri .gb-flag-icon {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -1641,7 +1650,7 @@ a {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.gb-flag-icon .flag-text {
+a.social-card.british-tri .flag-text {
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
     font-size: 1.1rem;
