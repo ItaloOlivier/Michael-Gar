@@ -787,9 +787,206 @@ a {
     color: var(--text-light);
 }
 
+/* News Section */
+.news-section {
+    background: var(--dark-bg);
+}
+
+.news-intro {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: -40px;
+    margin-bottom: 50px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.news-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-muted);
+    padding: 40px;
+}
+
+.news-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.5s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.news-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.news-card:nth-child(1) { transition-delay: 0.1s; }
+.news-card:nth-child(2) { transition-delay: 0.2s; }
+.news-card:nth-child(3) { transition-delay: 0.3s; }
+.news-card:nth-child(4) { transition-delay: 0.4s; }
+.news-card:nth-child(5) { transition-delay: 0.5s; }
+.news-card:nth-child(6) { transition-delay: 0.6s; }
+
+.news-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.news-card-media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--darker-bg);
+    overflow: hidden;
+}
+
+.news-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-card-media img {
+    transform: scale(1.1);
+}
+
+.news-card-media .video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.news-card-media .video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.news-card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    font-size: 3rem;
+}
+
+.news-card-content {
+    padding: 25px;
+}
+
+.news-card-date {
+    display: inline-block;
+    background: var(--dark-bg);
+    color: var(--accent-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.news-card-category {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.news-card-category.race-result {
+    background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+    color: #1a1a1a;
+}
+
+.news-card-category.announcement {
+    background: linear-gradient(135deg, #0066cc 0%, #00d4aa 100%);
+    color: white;
+}
+
+.news-card-category.training {
+    background: linear-gradient(135deg, #00aa55 0%, #00d474 100%);
+    color: white;
+}
+
+.news-card-category.media {
+    background: linear-gradient(135deg, #e63946 0%, #a8323d 100%);
+    color: white;
+}
+
+.news-card-category.other {
+    background: var(--card-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--text-muted);
+}
+
+.news-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+.news-card-text {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.news-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease, gap 0.3s ease;
+}
+
+.news-card-link:hover {
+    color: var(--text-light);
+    gap: 12px;
+}
+
+.news-card-link::after {
+    content: '\2192';
+}
+
+/* Responsive news grid */
+@media (max-width: 768px) {
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-card-content {
+        padding: 20px;
+    }
+
+    .news-card-title {
+        font-size: 1.1rem;
+    }
+}
+
 /* Achievements Section */
 .achievements-section {
-    background: var(--dark-bg);
+    background: var(--darker-bg);
 }
 
 .timeline {
@@ -1622,24 +1819,24 @@ a {
     box-shadow: 0 20px 60px rgba(0, 102, 204, 0.3);
 }
 
-a.social-card.british-tri {
-    background: linear-gradient(135deg, #012169 0%, #1a3a7c 50%, #cf142b 100%);
+.social-card.british-tri {
+    background: #1d4ed8;
     color: #fff;
 }
 
-a.social-card.british-tri:hover {
-    box-shadow: 0 20px 60px rgba(207, 20, 43, 0.4);
+.social-card.british-tri:hover {
+    box-shadow: 0 20px 60px rgba(29, 78, 216, 0.4);
 }
 
-a.social-card.british-tri .social-name {
+.social-card.british-tri .social-name {
     color: #fff;
 }
 
-a.social-card.british-tri .social-handle {
+.social-card.british-tri .social-handle {
     color: rgba(255, 255, 255, 0.8);
 }
 
-a.social-card.british-tri .gb-flag-icon {
+.social-card.british-tri .gb-flag-icon {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -1650,11 +1847,11 @@ a.social-card.british-tri .gb-flag-icon {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-a.social-card.british-tri .flag-text {
+.social-card.british-tri .flag-text {
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
     font-size: 1.1rem;
-    color: #012169;
+    color: #1d4ed8;
 }
 
 .social-name {
