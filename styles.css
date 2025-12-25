@@ -1,16 +1,16 @@
 /* CSS Variables */
 :root {
-    --primary-color: #e91e8c;
-    --primary-dark: #b8157a;
-    --secondary-color: #ff6b9d;
-    --accent-color: #ff69b4;
-    --dark-bg: #1a0a14;
-    --darker-bg: #0d0509;
-    --card-bg: #2d1221;
+    --primary-color: #0066cc;
+    --primary-dark: #004499;
+    --secondary-color: #ff6b35;
+    --accent-color: #00d4aa;
+    --dark-bg: #0a1628;
+    --darker-bg: #060d18;
+    --card-bg: #12233d;
     --text-light: #ffffff;
-    --text-muted: #c0a0b0;
-    --gradient-primary: linear-gradient(135deg, #e91e8c 0%, #ff69b4 100%);
-    --gradient-hero: linear-gradient(135deg, #1a0a14 0%, #3d1a2d 50%, #1a0a14 100%);
+    --text-muted: #a0aec0;
+    --gradient-primary: linear-gradient(135deg, #0066cc 0%, #00d4aa 100%);
+    --gradient-hero: linear-gradient(135deg, #0a1628 0%, #1a365d 50%, #0a1628 100%);
 }
 
 /* Reset & Base */
