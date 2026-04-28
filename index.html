@@ -16,6 +16,7 @@
         <nav class="navbar">
             <div class="logo">MG Fan Page</div>
             <ul class="nav-links">
+                <li><a href="#video-showcase">Video</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#achievements">Achievements</a></li>
                 <li><a href="#gallery">Gallery</a></li>
@@ -47,6 +48,28 @@
     </header>
 
     <main>
+        <section id="video-showcase" class="section video-showcase-section">
+            <div class="video-showcase-bg"></div>
+            <div class="container">
+                <div class="video-showcase-badge">🎬 FEATURED VIDEO</div>
+                <h2 class="video-showcase-title">Haikou World Cup</h2>
+                <p class="video-showcase-subtitle">Watch Michael Gar compete on the world stage</p>
+                <div class="video-wrapper">
+                    <video id="showcase-video" class="showcase-video" controls playsinline preload="metadata" poster="">
+                        <source src="videos/haikou-wc.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-play-overlay" id="video-play-overlay" onclick="playShowcaseVideo()">
+                        <div class="play-button-ring">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="about" class="section about-section">
             <div class="container">
                 <h2 class="section-title">About Michael</h2>
@@ -94,6 +117,20 @@
                         <div class="timeline-content gold-border">
                             <h3>🇬🇧 BRITISH TRIATHLON OLYMPIC PROGRAMME</h3>
                             <p>Selected for the prestigious British Triathlon Olympic World Class Programme for 2026, joining elite athletes on the road to the Olympics!</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item featured">
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-content gold-border">
+                            <h3>🌟 WTCS DEBUT - 19th at Samarkand, Uzbekistan</h3>
+                            <p>Top-20 finish on his World Triathlon Championship Series debut, securing a #19 ranking on the WTCS standings.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-content">
+                            <h3>10th Place - World Triathlon Cup Haikou, China</h3>
+                            <p>Strong top-10 World Cup result in China, opening the 2026 season with a 51:28 sprint performance.</p>
                         </div>
                     </div>
                     <div class="timeline-item featured">
@@ -432,15 +469,19 @@
                     <div class="stats-grid">
                         <div class="ranking-card">
                             <span class="ranking-label">World Ranking</span>
-                            <span class="ranking-value">107</span>
+                            <span class="ranking-value">71</span>
+                        </div>
+                        <div class="ranking-card highlight">
+                            <span class="ranking-label">WTCS Series</span>
+                            <span class="ranking-value">19</span>
                         </div>
                         <div class="ranking-card">
                             <span class="ranking-label">Continental</span>
-                            <span class="ranking-value">61</span>
+                            <span class="ranking-value">45</span>
                         </div>
                         <div class="ranking-card highlight">
                             <span class="ranking-label">Starts</span>
-                            <span class="ranking-value">24</span>
+                            <span class="ranking-value">26</span>
                         </div>
                         <div class="ranking-card highlight">
                             <span class="ranking-label">Podiums</span>
@@ -454,6 +495,18 @@
 
                     <h4 class="results-title">Latest Results</h4>
                     <div class="results-table">
+                        <div class="result-row">
+                            <span class="result-pos">19th</span>
+                            <span class="result-date">Apr 25, 2026</span>
+                            <span class="result-event">World Triathlon Championship Series Samarkand</span>
+                            <span class="result-time">01:45:43</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-pos">10th</span>
+                            <span class="result-date">Mar 21, 2026</span>
+                            <span class="result-event">World Triathlon Cup Haikou</span>
+                            <span class="result-time">00:51:28</span>
+                        </div>
                         <div class="result-row">
                             <span class="result-pos pos-4">4th</span>
                             <span class="result-date">Nov 15, 2025</span>
@@ -472,18 +525,6 @@
                             <span class="result-event">World Championship Finals Wollongong (U23)</span>
                             <span class="result-time">01:49:02</span>
                         </div>
-                        <div class="result-row">
-                            <span class="result-pos pos-1">1st</span>
-                            <span class="result-date">Sep 27, 2025</span>
-                            <span class="result-event">ITA Sprint Triathlon National Championships</span>
-                            <span class="result-time">00:51:54</span>
-                        </div>
-                        <div class="result-row">
-                            <span class="result-pos">48th</span>
-                            <span class="result-date">Jul 19, 2025</span>
-                            <span class="result-event">Europe Triathlon Championships Melilla</span>
-                            <span class="result-time">00:56:01</span>
-                        </div>
                     </div>
 
                     <a href="https://triathlon.org/athletes/profile/160628/michael-gar" target="_blank" rel="noopener noreferrer" class="view-full-profile-btn">
@@ -498,7 +539,7 @@
         <div class="container">
             <p>This is an unofficial fan page dedicated to celebrating Michael Gar's triathlon career.</p>
             <p>For official information, visit <a href="https://triathlon.org/athletes/profile/160628/michael-gar" target="_blank" rel="noopener noreferrer">World Triathlon</a></p>
-            <p class="copyright">© 2025 Michael Gar Fan Page | Made with 💙 by a fan</p>
+            <p class="copyright">© 2026 Michael Gar Fan Page | Made with 💙 by a fan</p>
         </div>
     </footer>
 
@@ -507,6 +548,20 @@
 
     <!-- Scroll Animations Script -->
     <script>
+        // Video showcase play overlay
+        function playShowcaseVideo() {
+            const video = document.getElementById('showcase-video');
+            const overlay = document.getElementById('video-play-overlay');
+            overlay.style.display = 'none';
+            video.play();
+        }
+        document.getElementById('showcase-video').addEventListener('pause', function() {
+            document.getElementById('video-play-overlay').style.display = 'flex';
+        });
+        document.getElementById('showcase-video').addEventListener('play', function() {
+            document.getElementById('video-play-overlay').style.display = 'none';
+        });
+
         // Load and render news articles
         async function loadNews() {
             const container = document.getElementById('news-container');
