@@ -1,6 +1,5 @@
 # Render Blueprint for Michael Gar's static site (michaelgar.com).
-# Mirrors the Render service `michael-gar` (id srv-d7ni3u0k1i2s739m35j0)
-# already provisioned via the Render dashboard.
+# Mirrors the live Render service config so deploys are reproducible from git.
 
 services:
   - type: web
