@@ -1,15 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Michael Gar Fan Page | Elite Triathlete</title>
+<title>{{TITLE}}</title>
 <meta name="description" content="Fan page dedicated to Michael Gar, elite British triathlete: British Champion 2025 and 2026, Italian Champion 2025, two European Championship silvers in 2026.">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta property="og:title" content="Michael Gar | Elite Triathlete">
-<meta property="og:description" content="Fan page for Michael Gar, elite British triathlete: British Champion 2025 and 2026, European Championship silver medallist 2026.">
-<meta property="og:image" content="https://michaelgar.com/images/gallery/elblag-2026-run.jpg">
-<meta property="og:type" content="website">
+{{HEAD_EXTRA}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
@@ -231,8 +222,9 @@
     .gallery img, .btn, .follow a, .sponsor { transition: none; }
   }
 </style>
-</head>
-<body>
+
+{{RIBBON}}
+
 <nav class="nav" aria-label="Primary">
   <div class="wrap">
     <a class="mark" href="#top">MG <small>Fan page</small></a>
@@ -250,7 +242,7 @@
 </nav>
 
 <header class="hero" id="top">
-  <img class="hero-img" src="images/gallery/elblag-2026-run.jpg" alt="Michael Gar running through the streets of Elbląg at the 2026 European Sprint Championships">
+  <img class="hero-img" src="{{IMG:elblag-2026-run.jpg}}" alt="Michael Gar running through the streets of Elbląg at the 2026 European Sprint Championships">
   <div class="wrap">
     <ul class="chips" aria-label="Credentials">
       <li><b>GB</b>Olympic Programme 2026</li>
@@ -283,7 +275,7 @@
 <section class="section" id="about">
   <div class="wrap about">
     <figure class="about-img">
-      <img src="images/gallery/supertri-jersey-portrait.jpg" alt="Michael Gar in Podium Racing kit at the supertri Final in Jersey" loading="lazy">
+      <img src="{{IMG:supertri-jersey-portrait.jpg}}" alt="Michael Gar in Podium Racing kit at the supertri Final in Jersey" loading="lazy">
       <figcaption>supertri Final · Jersey</figcaption>
     </figure>
     <div class="about-copy">
@@ -359,7 +351,7 @@
       <p>Michael on the world stage in China, March 2026.</p>
     </div>
     <div class="video-block">
-      <video controls playsinline preload="metadata" poster="images/haikou-poster.jpg"><source src="videos/haikou-wc-720.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+      {{VIDEO}}
       <div class="video-meta"><span><b>World Triathlon Cup Haikou</b> · 21 Mar 2026</span><span>10th · <b>51:28</b></span></div>
     </div>
   </div>
@@ -377,15 +369,15 @@
       <p>Elbląg, Tarragona and the supertri Final in Jersey, 2026.</p>
     </div>
     <div class="gallery">
-      <figure class="g-big"><img src="images/gallery/elblag-2026-podium.jpg" alt="Michael Gar on the podium at the 2026 Europe Triathlon Sprint Championships in Elbląg" loading="lazy"><figcaption>Elbląg podium · European sprint silver</figcaption></figure>
-      <figure class="g-tall"><img src="images/gallery/tarragona-2026-medal.jpg" alt="Michael Gar celebrating with his European Championships silver medal in Tarragona" loading="lazy"><figcaption>Tarragona · silver medal</figcaption></figure>
-      <figure class="g-tall"><img src="images/gallery/tarragona-2026-run.jpg" alt="Michael Gar running in GB kit at the 2026 European Championships in Tarragona" loading="lazy"><figcaption>Tarragona · run leg</figcaption></figure>
-      <figure class="g-wide"><img src="images/gallery/tarragona-2026-bike.jpg" alt="Michael Gar on the bike leg at the 2026 European Championships in Tarragona" loading="lazy"><figcaption>Tarragona · bike leg</figcaption></figure>
-      <figure><img src="images/gallery/tarragona-2026-podium.jpg" alt="Michael Gar with Oliver Conway and Roberto Sanchez Mantecon on the Tarragona 2026 podium" loading="lazy"><figcaption>Tarragona podium</figcaption></figure>
-      <figure><img src="images/gallery/wetsuit-pre-race.jpg" alt="Michael Gar adjusting his goggles in his wetsuit before a race" loading="lazy"><figcaption>Pre-race</figcaption></figure>
-      <figure class="g-tall"><img src="images/gallery/supertri-jersey-bike.jpg" alt="Michael Gar riding for Podium Racing at the supertri Championship Final in Jersey" loading="lazy"><figcaption>supertri Final · Jersey</figcaption></figure>
-      <figure class="g-wide"><img src="images/gallery/supertri-jersey-final.jpg" alt="Michael Gar racing the bike course at the supertri Final in Jersey" loading="lazy"><figcaption>supertri Final · bike course</figcaption></figure>
-      <figure><img src="images/gallery/supertri-jersey-bike-check.jpg" alt="Michael Gar with his bike before the supertri Final in Jersey" loading="lazy"><figcaption>Bike check · Jersey</figcaption></figure>
+      <figure class="g-big"><img src="{{IMG:elblag-2026-podium.jpg}}" alt="Michael Gar on the podium at the 2026 Europe Triathlon Sprint Championships in Elbląg" loading="lazy"><figcaption>Elbląg podium · European sprint silver</figcaption></figure>
+      <figure class="g-tall"><img src="{{IMG:tarragona-2026-medal.jpg}}" alt="Michael Gar celebrating with his European Championships silver medal in Tarragona" loading="lazy"><figcaption>Tarragona · silver medal</figcaption></figure>
+      <figure class="g-tall"><img src="{{IMG:tarragona-2026-run.jpg}}" alt="Michael Gar running in GB kit at the 2026 European Championships in Tarragona" loading="lazy"><figcaption>Tarragona · run leg</figcaption></figure>
+      <figure class="g-wide"><img src="{{IMG:tarragona-2026-bike.jpg}}" alt="Michael Gar on the bike leg at the 2026 European Championships in Tarragona" loading="lazy"><figcaption>Tarragona · bike leg</figcaption></figure>
+      <figure><img src="{{IMG:tarragona-2026-podium.jpg}}" alt="Michael Gar with Oliver Conway and Roberto Sanchez Mantecon on the Tarragona 2026 podium" loading="lazy"><figcaption>Tarragona podium</figcaption></figure>
+      <figure><img src="{{IMG:wetsuit-pre-race.jpg}}" alt="Michael Gar adjusting his goggles in his wetsuit before a race" loading="lazy"><figcaption>Pre-race</figcaption></figure>
+      <figure class="g-tall"><img src="{{IMG:supertri-jersey-bike.jpg}}" alt="Michael Gar riding for Podium Racing at the supertri Championship Final in Jersey" loading="lazy"><figcaption>supertri Final · Jersey</figcaption></figure>
+      <figure class="g-wide"><img src="{{IMG:supertri-jersey-final.jpg}}" alt="Michael Gar racing the bike course at the supertri Final in Jersey" loading="lazy"><figcaption>supertri Final · bike course</figcaption></figure>
+      <figure><img src="{{IMG:supertri-jersey-bike-check.jpg}}" alt="Michael Gar with his bike before the supertri Final in Jersey" loading="lazy"><figcaption>Bike check · Jersey</figcaption></figure>
     </div>
   </div>
 </section>
@@ -446,7 +438,7 @@
       <a class="mark" href="#top">MG <small>Fan page</small></a>
       <p>This is an unofficial fan page celebrating Michael Gar's triathlon career. For official information, visit World Triathlon. © 2026 Michael Gar Fan Page.</p>
     </div>
-    <div class="compare"><a href="classic/">Previous design</a> · <a href="admin/">Admin</a></div>
+    <div class="compare">{{FOOTER_LINKS}}</div>
   </div>
 </footer>
 
@@ -475,5 +467,3 @@
     .catch(function () {});
 })();
 </script>
-</body>
-</html>
