@@ -91,7 +91,7 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 - Animated badges and cards
 
 ## Recent Updates
-- Sep 2026: Sponsors section (707, Podium Racing, C-Bear), 12 new gallery photos (Tarragona, Elbląg, supertri Jersey), 2026 results in timeline + results table, British Champion 2026 badge, age 22
+- Sep 2026: Sponsors section (707, Podium Racing, C-Bear), 11 new gallery photos (Tarragona, Elbląg, supertri Jersey), 2026 results in timeline + results table, British Champion 2026 badge, age 22
 - Added News section with dynamic JSON-powered article cards
 - Redesigned admin panel with modern UI, password toggle, step-by-step instructions
 - Added British Triathlon profile link
