@@ -91,6 +91,18 @@
     linear-gradient(to top, rgba(10,22,40,0.97) 0%, rgba(10,22,40,0.88) 22%, rgba(10,22,40,0.55) 45%, rgba(10,22,40,0.12) 72%, rgba(10,22,40,0) 100%); opacity: .5; }
   .dive-bar { position: absolute; top: 28px; left: 0; right: 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; pointer-events: none; }
   .dive-bar .eyebrow { color: var(--ink-2); margin: 0; text-shadow: 0 1px 10px rgba(0,0,0,0.7); }
+  .dive-tools { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; pointer-events: auto; }
+  .sound-btn { display: inline-flex; align-items: center; gap: 9px; background: rgba(6,13,24,0.55); border: 1px solid var(--line-strong); color: var(--ink-2); font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 7px 11px; cursor: pointer; transition: border-color .18s, color .18s; }
+  .sound-btn:hover { border-color: var(--teal); color: var(--ink); }
+  .sound-ico { display: inline-flex; align-items: flex-end; gap: 2px; height: 11px; }
+  .sound-ico i { width: 2px; background: var(--slate); height: 4px; transition: height .2s, background .2s; }
+  .sound-ico i:nth-child(2) { height: 8px; }
+  .sound-ico i:nth-child(3) { height: 11px; }
+  .sound-btn[aria-pressed="true"] .sound-ico i { background: var(--teal); animation: eq .9s ease-in-out infinite; }
+  .sound-btn[aria-pressed="true"] .sound-ico i:nth-child(2) { animation-delay: .15s; }
+  .sound-btn[aria-pressed="true"] .sound-ico i:nth-child(3) { animation-delay: .3s; }
+  @keyframes eq { 0%, 100% { height: 4px; } 50% { height: 11px; } }
+  @media (prefers-reduced-motion: reduce) { .sound-btn[aria-pressed="true"] .sound-ico i { animation: none; height: 8px; } }
   .dive-hint { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin: 0; display: flex; align-items: center; gap: 10px; transition: opacity .3s; }
   .dive-hint::after { content: ""; width: 1px; height: 26px; background: var(--teal); animation: hint 1.6s ease-in-out infinite; transform-origin: top; }
   @keyframes hint { 0%, 100% { transform: scaleY(.25); opacity: .35; } 50% { transform: scaleY(1); opacity: 1; } }
@@ -273,9 +285,16 @@
     <div class="dive-scrim"></div>
     <div class="dive-bar wrap">
       <p class="eyebrow">Hamburg · World Championship relay · Team GB</p>
-      <p class="dive-hint">Scroll to dive in</p>
+      <div class="dive-tools">
+        <button type="button" class="sound-btn" id="sound-btn" aria-pressed="false" hidden>
+          <span class="sound-ico" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="sound-label">Sound off</span>
+        </button>
+        <p class="dive-hint">Scroll to dive in</p>
+      </div>
     </div>
     <p class="dive-load" aria-hidden="true"></p>
+    <audio id="hero-audio" src="../audio/hero-theme.m4a" loop preload="none"></audio>
     <div class="dive-title wrap">
       <ul class="chips" aria-label="Credentials">
         <li><b>GB</b>Olympic Programme 2026</li>
@@ -488,7 +507,7 @@
 <script>
 (function () {
   document.documentElement.classList.remove('no-js');
-  var COUNT = 30, PATH = '../images/hero-frames/', EXT = '.webp';
+  var COUNT = 32, PATH = '../images/hero-frames/', EXT = '.webp';
   var stage = document.querySelector('.dive'), canvas = document.querySelector('.dive-canvas'),
       poster = document.querySelector('.dive-poster'), title = document.querySelector('.dive-title'),
       hint = document.querySelector('.dive-hint'), scrim = document.querySelector('.dive-scrim'),
@@ -564,6 +583,30 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', function () { size(); draw(true); });
   size(); draw(true);
+})();
+(function () {
+  var btn = document.getElementById('sound-btn'), audio = document.getElementById('hero-audio');
+  if (!btn || !audio) return;
+  btn.hidden = false;
+  var label = btn.querySelector('.sound-label'), on = false;
+  function set(state) {
+    on = state;
+    btn.setAttribute('aria-pressed', String(on));
+    label.textContent = on ? 'Sound on' : 'Sound off';
+    try { localStorage.setItem('mg-sound', on ? '1' : '0'); } catch (e) {}
+  }
+  btn.addEventListener('click', function () {
+    if (on) { audio.pause(); set(false); return; }
+    audio.volume = 0.55;
+    var play = audio.play();
+    if (play && play.catch) play.catch(function () { set(false); });
+    set(true);
+  });
+  // a remembered "on" still needs one gesture: browsers block audio without it
+  try { if (localStorage.getItem('mg-sound') === '1') {
+    var once = function () { btn.click(); window.removeEventListener('pointerdown', once); };
+    window.addEventListener('pointerdown', once, { once: true });
+  } } catch (e) {}
 })();
 (function () {
   fetch('news.json', { cache: 'no-cache' })

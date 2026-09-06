@@ -29,10 +29,11 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 │   ├── gallery/        # Gallery photos (local JPEGs, max 1600px, descriptive names)
 │   ├── haikou-poster.jpg  # Video poster frame
 │   ├── hero-poster.jpg    # Dive-hero frame 1 (LCP + OG image)
-│   ├── hero-frames/       # 48 scroll-scrubbed dive frames
+│   ├── hero-frames/       # 32 scroll-scrubbed dive frames (WebP)
 │   └── gallery/hamburg-dive.jpg  # Dive-hero image (root hamburg-dive.jpeg is the classic page's copy)
 │   └── news/           # News article images
 ├── videos/haikou-wc-720.mp4  # Featured video (web encode)
+├── audio/hero-theme.m4a      # Hero music, opt-in via the Sound button
 └── admin/              # Admin panel for news management
     ├── index.html      # Admin dashboard
     └── admin.css       # Admin styles
@@ -55,17 +56,15 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 The classic page keeps its own system in `styles.css` (Montserrat/Open Sans, blue-teal gradients).
 
 ## Key Sections (live page, in order)
-1. **Dive hero** - Pinned, scroll-scrubbed frame sequence. The camera opens at the photographer's position beside the canal, swings behind Michael as he holds a flat streamlined dive travelling forward, and ends as he enters the water. The name and CTAs surface over the spray. Scroll position picks the frame; nothing autoplays.
-   - Frames: `images/hero-frames/f001..f030.webp` (30 frames, 1280px native, WebP q86, ~3.4 MB total). `images/hero-poster.jpg` is **not** a generated frame - it is the original photograph (`hamburg-dive.jpeg`) cropped to the same 1600x900 window the video was seeded from, which is visibly sharper than anything sora-2 rendered from it. It is the LCP element, the Open Graph image, and what is on screen at rest.
-   - The canvas only fades in once scroll progress passes 0.012, so a visitor who never scrolls sees the real photograph rather than a soft rendered frame. Do not revert this: the at-rest view is the most-seen state and the generated frames lose the crowd faces and banner text. `COUNT`/`EXT` in the inline script must match what is in the folder.
-   - Source: generated with OpenAI **sora-2** image-to-video, seeded with a 1280x720 crop of `images/gallery/hamburg-dive.jpg`. The underwater portion is generated, not real race footage - keep that in mind before describing it as footage anywhere. Regenerate with `redesign/generate-hero.py` (currently written for fal.ai; the working Sora call is documented below).
-   - Sora notes: `POST /v1/videos` multipart with `model`, `prompt`, `seconds`, `size`, `input_reference` (image must match `size` exactly). Poll `GET /v1/videos/{id}`, download `GET /v1/videos/{id}/content`. **Prompt wording matters** - naming the athlete's nationality/kit and "body-mounted" phrasing tripped `moderation_blocked`; neutral camera-motion language passed.
+1. **Dive hero** - Pinned, scroll-scrubbed frame sequence. The camera opens on the photographer's framing, swings round behind Michael as he holds a flat streamlined dive, and rides with him into the water. Scroll position picks the frame; nothing autoplays.
+   - **Source: Grok Imagine (xAI), image-to-video, 1728x1152 @24fps**, seeded with a 16:9 crop of `hamburg-dive.jpeg`. This replaced an OpenAI `sora-2` attempt that only rendered 1280x720 and was visibly soft. Original clip is 10s; the hero uses the **first 4s**. Seconds 5-10 hold a back-mounted view of him swimming freestyle down the canal, which is unused and available if a longer hero is ever wanted.
+   - Frames: `images/hero-frames/f001..f032.webp` (32 frames, 1280px downscaled from 1728 so the pixels are genuinely sharp, WebP q70, ~4.75 MB). `COUNT`/`EXT` in the inline script must match the folder.
+   - Poster: `images/hero-poster.jpg`, frame 1 downscaled from the 1728 source. The canvas only fades in past scroll 0.012, so a visitor who never scrolls sees a sharp still.
+   - **Music:** `audio/hero-theme.m4a` is the audio track from the Grok clip. It NEVER autoplays - a "Sound off/on" button in the hero toggles it, the choice is remembered in `localStorage` under `mg-sound`, and a remembered "on" still waits for one pointer gesture because browsers block audio without one.
    - Debug: append `?dive=0.5` (0..1) to freeze the camera at any point for screenshots.
-   - Fallbacks: static poster under `prefers-reduced-motion`, with JS off (`no-js` on `<html>`), and on `saveData`/2g connections, which skip the 2.2 MB of frames entirely.
-   - The generated clip runs 8.3s (30fps) but only the first **1.2s** is usable. The body stays flat and streamlined for roughly the first 36 source frames; after that it pikes, angles steeply down and the athlete shrinks in frame, which reads as a plunge rather than a racing dive. Check any regenerated clip frame by frame for this before extracting - the failure appears well before the water entry.
-   - Processing that ships: `hqdn3d=2:1.5:4:3` then `unsharp=3:3:0.55:3:3:0` at native 1280, WebP q86. An earlier `unsharp=5:5:1.0` pass added visible grain, and a 1.5x lanczos upscale doubled the bytes without adding detail. Do not upscale.
-   - **Known ceiling:** `sora-2` only renders 1280x720, so the frames are soft at full-bleed hero size no matter how they are processed. The real fix is `sora-2-pro` at 1792x1024, plus a prompt stressing a FLAT, shallow, forward-travelling racing dive and streamline (never "down", "plunge" or "descend"). Both attempts to run that were blocked by `insufficient_quota` on the OpenAI account.
-   - Rejected approach: CSS transforms over the flat photo. It reads as a pan-and-zoom, not a camera move. Do not retry it.
+   - Fallbacks: static poster under `prefers-reduced-motion`, with JS off (`no-js` on `<html>`), and on `saveData`/2g connections, which skip the frames entirely.
+   - Prompt lessons (see `~/Downloads/michael-dive-PROMPT.txt`): never use "down", "plunge", "descend" or "underwater" - they make the model rotate the athlete feet-up into a vertical sink that reads as drowning. Repeat "flat", "horizontal", "streamlined" more than once or the body pikes within a second. Do not name nationality, kit or "body-mounted camera"; that tripped OpenAI moderation.
+   - Rejected approaches: CSS transforms over the flat photo (reads as a pan-and-zoom); scrubbing a `<video>` via `currentTime` (needs dense keyframes, which came out at 8.5 MB versus 4.75 MB for frames); AVIF frames (no smaller than WebP on spray-heavy content); upscaling frames (bytes without detail).
 
 2. **Stat strip** - #19 WTCS standing, 2× British Champion, 2 European silvers 2026, 29:38 fastest 10 km
 3. **About** - Portrait, bio, pull quote, fact list
@@ -117,7 +116,7 @@ Not carried over from classic: Instagram embed, World Triathlon ranking/starts/p
 - Sharp, rule-based layout; hover states only (no scroll animations)
 
 ## Recent Updates
-- Sep 2026: Scroll-scrubbed dive hero built from a Sora-generated camera move; gallery grew to 19 photos (3 previously hotlinked, 5 new from WhatsApp) and switched to a column layout
+- Sep 2026: Dive hero regenerated with Grok Imagine at 1728x1152 (sharp), plus opt-in hero music; gallery grew to 19 photos (3 previously hotlinked, 5 new from WhatsApp) and switched to a column layout
 - Sep 2026: Editorial redesign went live at root; previous design kept at `/classic/` (tag `classic-design`); 720p Haikou video committed; Cervia women's podium photo and Tarragona full-podium photo removed from all pages
 - Sep 2026: Sponsors section (707, Podium Racing, C-Bear), 11 new gallery photos (Tarragona, Elbląg, supertri Jersey), 2026 results in timeline + results table, British Champion 2026 badge, age 22
 - Added News section with dynamic JSON-powered article cards
