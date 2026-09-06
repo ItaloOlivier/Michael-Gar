@@ -506,7 +506,7 @@
     var im = new Image();
     im.onload = function () {
       ok[i] = true; loaded++;
-      if (loaded === 1) { canvas.classList.add('ready'); size(); }
+      if (loaded === 1) { size(); }
       if (load) load.textContent = loaded < COUNT ? 'Loading ' + Math.round(loaded / COUNT * 100) + '%' : '';
       if (loaded === COUNT && load) load.style.opacity = 0;
       draw(true);
@@ -545,6 +545,8 @@
   function draw(force) {
     var p = progress(), want = Math.min(COUNT - 1, Math.round(p * (COUNT - 1))), idx = nearest(want);
     if (idx >= 0 && (force || idx !== cur)) { cur = idx; paint(imgs[idx]); }
+    // at rest the poster is the original photograph, which is sharper than any rendered frame
+    canvas.classList.toggle('ready', p > 0.012 && idx >= 0);
     var reveal = Math.max(0, Math.min(1, (p - 0.72) / 0.28));
     title.style.opacity = reveal;
     title.style.transform = 'translateY(' + (26 * (1 - reveal)) + 'px)';
