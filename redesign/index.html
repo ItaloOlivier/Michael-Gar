@@ -88,7 +88,7 @@
   .dive-canvas { opacity: 0; transition: opacity .4s ease; }
   .dive-canvas.ready { opacity: 1; }
   .dive-scrim { position: absolute; inset: 0; pointer-events: none; background:
-    linear-gradient(to top, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.55) 30%, rgba(10,22,40,0) 65%); opacity: .55; }
+    linear-gradient(to top, rgba(10,22,40,0.97) 0%, rgba(10,22,40,0.88) 22%, rgba(10,22,40,0.55) 45%, rgba(10,22,40,0.12) 72%, rgba(10,22,40,0) 100%); opacity: .5; }
   .dive-bar { position: absolute; top: 28px; left: 0; right: 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; pointer-events: none; }
   .dive-bar .eyebrow { color: var(--ink-2); margin: 0; text-shadow: 0 1px 10px rgba(0,0,0,0.7); }
   .dive-hint { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin: 0; display: flex; align-items: center; gap: 10px; transition: opacity .3s; }
@@ -488,7 +488,7 @@
 <script>
 (function () {
   document.documentElement.classList.remove('no-js');
-  var COUNT = 48, PATH = '../images/hero-frames/';
+  var COUNT = 36, PATH = '../images/hero-frames/', EXT = '.webp';
   var stage = document.querySelector('.dive'), canvas = document.querySelector('.dive-canvas'),
       poster = document.querySelector('.dive-poster'), title = document.querySelector('.dive-title'),
       hint = document.querySelector('.dive-hint'), scrim = document.querySelector('.dive-scrim'),
@@ -518,7 +518,7 @@
       draw(true);
     };
     im.onerror = function () { loaded++; if (loaded === COUNT && load) load.style.opacity = 0; };
-    im.src = PATH + 'f' + pad(i + 1) + '.jpg';
+    im.src = PATH + 'f' + pad(i + 1) + EXT;
     imgs[i] = im;
   })(i);
 
@@ -554,7 +554,7 @@
     var reveal = Math.max(0, Math.min(1, (p - 0.72) / 0.28));
     title.style.opacity = reveal;
     title.style.transform = 'translateY(' + (26 * (1 - reveal)) + 'px)';
-    scrim.style.opacity = 0.45 + 0.5 * reveal;
+    scrim.style.opacity = 0.4 + 0.6 * reveal;
     if (hint) hint.style.opacity = Math.max(0, 1 - p * 6);
   }
   var tick = false;
