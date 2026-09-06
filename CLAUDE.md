@@ -6,7 +6,7 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 ## Tech Stack
 - **HTML5** - Semantic markup, single page
 - **CSS3** - Inline in `index.html` (built from `redesign/template.html`), CSS variables, no gradients
-- **Vanilla JavaScript** - Only the news loader (`news.json` → Latest news section, hidden when empty)
+- **Vanilla JavaScript** - Dive-hero scroll scrub (rAF, transform/opacity only) and the news loader (`news.json` → Latest news section, hidden when empty)
 - **Google Fonts** - Bebas Neue (display), Hanken Grotesk (body), JetBrains Mono (times, labels)
 
 ## Two designs: live and classic (rollback)
@@ -28,6 +28,7 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 ├── images/             # Image assets
 │   ├── gallery/        # Gallery photos (local JPEGs, max 1600px, descriptive names)
 │   ├── haikou-poster.jpg  # Video poster frame
+│   └── gallery/hamburg-dive.jpg  # Dive-hero image (root hamburg-dive.jpeg is the classic page's copy)
 │   └── news/           # News article images
 ├── videos/haikou-wc-720.mp4  # Featured video (web encode)
 └── admin/              # Admin panel for news management
@@ -52,13 +53,13 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 The classic page keeps its own system in `styles.css` (Montserrat/Open Sans, blue-teal gradients).
 
 ## Key Sections (live page, in order)
-1. **Hero** - Full-bleed Elbląg run photo, credential chips, name, CTAs (video, sponsors)
+1. **Dive hero** - Pinned, scroll-scrubbed camera move over `hamburg-dive.jpeg`: starts low and to the side looking up at Michael, rises above him, tips over and dives with him through the surface, then the name surfaces underwater. Driven by a keyframe array (`K`) in the inline script; append `?dive=0.5` to the URL to freeze the camera at any point for screenshots. Falls back to a static hero under `prefers-reduced-motion` and with JS off (`no-js` class on `<html>`).
 2. **Stat strip** - #19 WTCS standing, 2× British Champion, 2 European silvers 2026, 29:38 fastest 10 km
 3. **About** - Portrait, bio, pull quote, fact list
 4. **Sponsors** - Light band: 707 Team Minini, Podium Racing, C-Bear (with Michael's quote); nav link + hero button
 5. **Results** - 2026 season table (position, event, date, time); medal rows highlighted
 6. **Video** - Haikou World Cup (720p encode, poster frame)
-7. **Gallery** - Masonry grid of race photos with hover captions
+7. **Gallery** - Masonry grid of race photos with hover captions, including Miyazaki 2025 bronze, the 707 Team Minini group, and the Llanelli Super Series swim start (all three were hotlinked from third-party sites on the classic page and are now local files)
 8. **Fan wall** - Three fan quotes
 9. **Latest news** - Hidden until `news.json` has articles
 10. **Follow** - Instagram, World Triathlon profile, British Triathlon
@@ -103,6 +104,7 @@ Not carried over from classic: Instagram embed, World Triathlon ranking/starts/p
 - Sharp, rule-based layout; hover states only (no scroll animations)
 
 ## Recent Updates
+- Sep 2026: Dive hero (scroll-scrubbed Hamburg dive) added; three previously hotlinked photos saved locally and added to the gallery
 - Sep 2026: Editorial redesign went live at root; previous design kept at `/classic/` (tag `classic-design`); 720p Haikou video committed; Cervia women's podium photo and Tarragona full-podium photo removed from all pages
 - Sep 2026: Sponsors section (707, Podium Racing, C-Bear), 11 new gallery photos (Tarragona, Elbląg, supertri Jersey), 2026 results in timeline + results table, British Champion 2026 badge, age 22
 - Added News section with dynamic JSON-powered article cards
