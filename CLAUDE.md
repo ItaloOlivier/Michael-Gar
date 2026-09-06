@@ -17,7 +17,7 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 ├── favicon.svg         # Site favicon
 ├── news.json           # News articles data
 ├── images/             # Image assets
-│   ├── gallery/        # Gallery photos
+│   ├── gallery/        # Gallery photos (local JPEGs, max 1600px, descriptive names)
 │   └── news/           # News article images
 └── admin/              # Admin panel for news management
     ├── index.html      # Admin dashboard
@@ -43,6 +43,7 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 ## Key Sections
 1. **Hero** - Full-screen banner with badges, CTA buttons
 2. **About** - Bio, stats cards, blockquote
+2a. **Sponsors** - Cards for 707 Team Minini, Podium Racing, C-Bear (with Michael's quote); hero sponsor button links here
 3. **News** - Dynamic news cards loaded from `news.json`, supports images/YouTube/external links
 4. **Achievements** - Timeline of career milestones
 5. **Gallery** - Photo grid with lightbox
@@ -69,8 +70,17 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 - World Triathlon: Profile ID 160628
 - British Triathlon: GB Elite Team profile
 
-## Sponsor
-- 707 Team Minini (https://www.707team.com/)
+## Sponsors
+- 707 Team Minini (https://www.707team.com/) - racing team, Italy
+- Podium Racing (https://www.podium-racing.com) - supertri team
+- C-Bear (https://c-bear.com/) - ceramic bearings; quote: "I use C-Bear ceramic bearings and bottom bracket"
+
+## 2026 Season Results (newest first)
+- 2nd, Europe Triathlon Sprint Championships Elbląg (31 Jul, 54:25)
+- 18th, WTCS London (25 Jul)
+- 2nd, Europe Triathlon Championships Tarragona, standard distance (13 Jun, 1:47:44)
+- 1st, British Elite Triathlon Championships, Llanelli (9 May) - British Champion 2026
+- 19th, WTCS Samarkand (25 Apr) · 10th, World Cup Haikou (21 Mar)
 
 ## Key Features
 - Responsive design (mobile-first approach)
@@ -81,6 +91,7 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 - Animated badges and cards
 
 ## Recent Updates
+- Sep 2026: Sponsors section (707, Podium Racing, C-Bear), 12 new gallery photos (Tarragona, Elbląg, supertri Jersey), 2026 results in timeline + results table, British Champion 2026 badge, age 22
 - Added News section with dynamic JSON-powered article cards
 - Redesigned admin panel with modern UI, password toggle, step-by-step instructions
 - Added British Triathlon profile link
