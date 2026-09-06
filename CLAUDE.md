@@ -28,6 +28,8 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 ├── images/             # Image assets
 │   ├── gallery/        # Gallery photos (local JPEGs, max 1600px, descriptive names)
 │   ├── haikou-poster.jpg  # Video poster frame
+│   ├── hero-poster.jpg    # Dive-hero frame 1 (LCP + OG image)
+│   ├── hero-frames/       # 48 scroll-scrubbed dive frames
 │   └── gallery/hamburg-dive.jpg  # Dive-hero image (root hamburg-dive.jpeg is the classic page's copy)
 │   └── news/           # News article images
 ├── videos/haikou-wc-720.mp4  # Featured video (web encode)
@@ -53,9 +55,14 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 The classic page keeps its own system in `styles.css` (Montserrat/Open Sans, blue-teal gradients).
 
 ## Key Sections (live page, in order)
-1. **Hero** - Full-bleed `hamburg-dive.jpg` with a staggered entrance (chips, name, meta, CTAs). `.hero-media` is a swappable slot: it takes an `<img>` today and is built to take a scroll-scrubbed frame sequence or `<video>` when the generated camera move is ready.
+1. **Dive hero** - Pinned, scroll-scrubbed frame sequence. The camera opens at the photographer's position beside the canal, swings behind Michael, then rides down his back through the surface and underwater, where the name and CTAs surface. Scroll position picks the frame; nothing autoplays.
+   - Frames: `images/hero-frames/f001..f048.jpg` (48 frames, 1152px, ~2.2 MB total). `images/hero-poster.jpg` is frame 1 and is the LCP element plus the Open Graph image.
+   - Source: generated with OpenAI **sora-2** image-to-video, seeded with a 1280x720 crop of `images/gallery/hamburg-dive.jpg`. The underwater portion is generated, not real race footage - keep that in mind before describing it as footage anywhere. Regenerate with `redesign/generate-hero.py` (currently written for fal.ai; the working Sora call is documented below).
+   - Sora notes: `POST /v1/videos` multipart with `model`, `prompt`, `seconds`, `size`, `input_reference` (image must match `size` exactly). Poll `GET /v1/videos/{id}`, download `GET /v1/videos/{id}/content`. **Prompt wording matters** - naming the athlete's nationality/kit and "body-mounted" phrasing tripped `moderation_blocked`; neutral camera-motion language passed.
+   - Debug: append `?dive=0.5` (0..1) to freeze the camera at any point for screenshots.
+   - Fallbacks: static poster under `prefers-reduced-motion`, with JS off (`no-js` on `<html>`), and on `saveData`/2g connections, which skip the 2.2 MB of frames entirely.
+   - Rejected approach: CSS transforms over the flat photo. It reads as a pan-and-zoom, not a camera move. Do not retry it.
 
-   **Pending: scroll-driven camera move.** The brief is a camera that starts at the photographer's position, swings round and above Michael as if mounted on his back, and rides him into the water, with scroll position driving it. This needs generated novel views (image-to-video), which needs a `FAL_KEY`; none is set on this machine. A first attempt that scrubbed CSS transforms over the flat photo was rejected as reading like a pan-and-zoom, not a camera move - do not retry that approach.
 2. **Stat strip** - #19 WTCS standing, 2× British Champion, 2 European silvers 2026, 29:38 fastest 10 km
 3. **About** - Portrait, bio, pull quote, fact list
 4. **Sponsors** - Light band: 707 Team Minini, Podium Racing, C-Bear (with Michael's quote); nav link + hero button
@@ -106,7 +113,7 @@ Not carried over from classic: Instagram embed, World Triathlon ranking/starts/p
 - Sharp, rule-based layout; hover states only (no scroll animations)
 
 ## Recent Updates
-- Sep 2026: Hero moved to the Hamburg dive photo; gallery grew to 19 photos (3 previously hotlinked, 5 new from WhatsApp) and switched to a column layout
+- Sep 2026: Scroll-scrubbed dive hero built from a Sora-generated camera move; gallery grew to 19 photos (3 previously hotlinked, 5 new from WhatsApp) and switched to a column layout
 - Sep 2026: Editorial redesign went live at root; previous design kept at `/classic/` (tag `classic-design`); 720p Haikou video committed; Cervia women's podium photo and Tarragona full-podium photo removed from all pages
 - Sep 2026: Sponsors section (707, Podium Racing, C-Bear), 11 new gallery photos (Tarragona, Elbląg, supertri Jersey), 2026 results in timeline + results table, British Champion 2026 badge, age 22
 - Added News section with dynamic JSON-powered article cards
