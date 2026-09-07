@@ -71,7 +71,7 @@ The classic page keeps its own system in `styles.css` (Montserrat/Open Sans, blu
 4. **Sponsors** - Light band: 707 Team Minini, Podium Racing, C-Bear (with Michael's quote); nav link + hero button
 5. **Results** - 2026 season table (position, event, date, time); medal rows highlighted
 6. **Video** - Haikou World Cup (720p encode, poster frame)
-7. **Gallery** - CSS column masonry (fills without holes; no fixed row spans) with hover captions, including Miyazaki 2025 bronze, the 707 Team Minini group, and the Llanelli Super Series swim start (all three were hotlinked from third-party sites on the classic page and are now local files)
+7. **Gallery** - CSS column masonry (fills without holes; no fixed row spans) with hover captions. 25 photos covering Elblag, Tarragona, supertri Jersey, Miyazaki, Llanelli and 707 Team Minini. Three of them (Miyazaki podium, 707 group, Llanelli swim start) were hotlinked from third-party sites on the classic page and are now local files.
 8. **Fan wall** - Three fan quotes
 9. **Latest news** - Hidden until `news.json` has articles
 10. **Follow** - Instagram, World Triathlon profile, British Triathlon
@@ -116,7 +116,7 @@ Not carried over from classic: Instagram embed, World Triathlon ranking/starts/p
 - Sharp, rule-based layout; hover states only (no scroll animations)
 
 ## Recent Updates
-- Sep 2026: Dive hero regenerated with Grok Imagine at 1728x1152 (sharp), plus opt-in hero music; gallery grew to 19 photos (3 previously hotlinked, 5 new from WhatsApp) and switched to a column layout
+- Sep 2026: Dive hero regenerated with Grok Imagine at 1728x1152 (sharp), plus opt-in hero music; gallery grew to 25 photos (3 previously hotlinked, 11 new from WhatsApp) and switched to a column layout
 - Sep 2026: Editorial redesign went live at root; previous design kept at `/classic/` (tag `classic-design`); 720p Haikou video committed; Cervia women's podium photo and Tarragona full-podium photo removed from all pages
 - Sep 2026: Sponsors section (707, Podium Racing, C-Bear), 11 new gallery photos (Tarragona, Elbląg, supertri Jersey), 2026 results in timeline + results table, British Champion 2026 badge, age 22
 - Added News section with dynamic JSON-powered article cards
