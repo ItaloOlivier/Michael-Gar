@@ -13,7 +13,7 @@ This is a fan page website for Michael Gar, an elite British triathlete. The sit
 - **Live (root `index.html`)** - the "editorial" redesign, went live Sep 2026. Source of truth is `redesign/template.html`; `index.html` is generated from it (see Build below). Do not hand-edit `index.html` without also updating the template.
 - **Classic (`classic/index.html`, served at `/classic/`)** - the previous design, kept for rollback and comparison. It uses the root `styles.css`, `images/`, `videos/`, `news.json` via `../` paths and is `noindex`. Git tag `classic-design` marks the last commit before the switch.
 - **Rollback** - `git mv classic/index.html index.html` and drop the `../` prefixes (or `git checkout classic-design -- index.html`), commit, push. Render redeploys on push to main.
-- **Build** - the template has placeholders (`{{IMG:file}}`, `{{VIDEO}}`, `{{RIBBON}}`, `{{TITLE}}`, `{{HEAD_EXTRA}}`, `{{FOOTER_LINKS}}`). The build script that fills them lived in the session scratchpad; regenerating is a simple substitution: images → `images/gallery/<file>`, video → `<video poster="images/haikou-poster.jpg"><source src="videos/haikou-wc-720.mp4">`, ribbon empty, footer links to `classic/` and `admin/`. `redesign/index.html` is the local demo variant (relative `../` paths, preview ribbon).
+- **Build** - the template has placeholders (`{{IMG:file}}`, `{{VIDEO}}`, `{{RIBBON}}`, `{{TITLE}}`, `{{HEAD_EXTRA}}`, `{{FOOTER_LINKS}}`). The build script that fills them lived in the session scratchpad; regenerating is a simple substitution: images → `images/gallery/<file>`, video → `<video poster="images/haikou-poster.jpg"><source src="videos/haikou-wc-720.mp4">`, ribbon empty, footer links to `classic/` and `admin/`. `{{HEAD_EXTRA}}` holds the favicon link and OG tags (copy them from the current `index.html`); diff the rebuilt output against `index.html` before changing the template. `redesign/index.html` is the local demo variant (relative `../` paths, preview ribbon).
 - **Video** - `videos/haikou-wc-720.mp4` (9 MB, 720p) is the committed web encode. The 89 MB original `videos/haikou-wc.mp4` stays untracked.
 
 ## Project Structure
@@ -66,12 +66,12 @@ The classic page keeps its own system in `styles.css` (Montserrat/Open Sans, blu
    - Prompt lessons (see `~/Downloads/michael-dive-PROMPT.txt`): never use "down", "plunge", "descend" or "underwater" - they make the model rotate the athlete feet-up into a vertical sink that reads as drowning. Repeat "flat", "horizontal", "streamlined" more than once or the body pikes within a second. Do not name nationality, kit or "body-mounted camera"; that tripped OpenAI moderation.
    - Rejected approaches: CSS transforms over the flat photo (reads as a pan-and-zoom); scrubbing a `<video>` via `currentTime` (needs dense keyframes, which came out at 8.5 MB versus 4.75 MB for frames); AVIF frames (no smaller than WebP on spray-heavy content); upscaling frames (bytes without detail).
 
-2. **Stat strip** - #19 WTCS standing, 2× British Champion, 2 European silvers 2026, 29:38 fastest 10 km
+2. **Stat strip** - 2nd U23 World Championships (Pontevedra 2026), 2× British Champion, 2 European silvers 2026, 29:38 fastest 10 km
 3. **About** - Portrait, bio, pull quote, fact list
 4. **Sponsors** - Light band: 707 Team Minini, Podium Racing, C-Bear (with Michael's quote); nav link + hero button
 5. **Results** - 2026 season table (position, event, date, time); medal rows highlighted
 6. **Video** - Haikou World Cup (720p encode, poster frame)
-7. **Gallery** - CSS column masonry (fills without holes; no fixed row spans) with hover captions. 25 photos covering Elblag, Tarragona, supertri Jersey, Miyazaki, Llanelli and 707 Team Minini. Three of them (Miyazaki podium, 707 group, Llanelli swim start) were hotlinked from third-party sites on the classic page and are now local files.
+7. **Gallery** - CSS column masonry (fills without holes; no fixed row spans) with hover captions. 40 photos covering Pontevedra (15, U23 Worlds), Elblag, Tarragona, supertri Jersey, Miyazaki, Llanelli and 707 Team Minini. Three of them (Miyazaki podium, 707 group, Llanelli swim start) were hotlinked from third-party sites on the classic page and are now local files.
 8. **Fan wall** - Three fan quotes
 9. **Latest news** - Hidden until `news.json` has articles
 10. **Follow** - Instagram, World Triathlon profile, British Triathlon
@@ -104,6 +104,7 @@ Not carried over from classic: Instagram embed, World Triathlon ranking/starts/p
 - C-Bear (https://c-bear.com/) - ceramic bearings; quote: "I use C-Bear ceramic bearings and bottom bracket"
 
 ## 2026 Season Results (newest first)
+- 2nd, World Triathlon U23 Championships, Pontevedra (25 Sep, 21 s behind Nils Serre Gehri; time not yet confirmed on the site)
 - 2nd, Europe Triathlon Sprint Championships Elbląg (31 Jul, 54:25)
 - 18th, WTCS London (25 Jul)
 - 2nd, Europe Triathlon Championships Tarragona, standard distance (13 Jun, 1:47:44)
@@ -116,6 +117,7 @@ Not carried over from classic: Instagram embed, World Triathlon ranking/starts/p
 - Sharp, rule-based layout; hover states only (no scroll animations)
 
 ## Recent Updates
+- Oct 2026: U23 World Championship silver (Pontevedra, 25 Sep) added to results, stat strip, hero chips and meta; 15 Pontevedra photos added to the gallery
 - Sep 2026: Dive hero regenerated with Grok Imagine at 1728x1152 (sharp), plus opt-in hero music; gallery grew to 25 photos (3 previously hotlinked, 11 new from WhatsApp) and switched to a column layout
 - Sep 2026: Editorial redesign went live at root; previous design kept at `/classic/` (tag `classic-design`); 720p Haikou video committed; Cervia women's podium photo and Tarragona full-podium photo removed from all pages
 - Sep 2026: Sponsors section (707, Podium Racing, C-Bear), 11 new gallery photos (Tarragona, Elbląg, supertri Jersey), 2026 results in timeline + results table, British Champion 2026 badge, age 22
